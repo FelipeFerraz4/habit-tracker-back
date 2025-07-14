@@ -1,0 +1,87 @@
+name: Bug Report (Back-end)
+description: Relate um bug encontrado no back-end da aplicação
+title: "[bug][backend] "
+labels: ["backend", "bug", "to do"]
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: 🐞 Resumo do Bug
+      description: Escreva um título claro e direto sobre o que está acontecendo.
+      placeholder: "Ex: Erro 500 ao tentar criar um hábito"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 🔁 Passos para reproduzir
+      description: Liste os passos para reproduzir o bug.
+      placeholder: |
+        1. Faça login
+        2. Vá até a tela de criação de hábito
+        3. Preencha o formulário e envie
+        4. Ocorre um erro 500
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: ✅ Comportamento esperado
+      description: O que deveria acontecer?
+      placeholder: "O hábito deveria ser criado e retornado com status 201"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: ❌ Comportamento atual
+      description: O que realmente está acontecendo?
+      placeholder: "Está retornando um erro 500 com mensagem NullPointerException"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 📄 Logs ou mensagens de erro
+      description: Inclua logs do console, stack trace ou mensagens do Postman/Swagger.
+      placeholder: |
+        Ex:
+        ```
+        java.lang.NullPointerException: Cannot invoke "User.getId()" because "user" is null
+        ```
+    validations:
+      required: false
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 🚨 Nível de Severidade
+      description: Quão crítico é esse bug?
+      options:
+        - Baixa (não impacta o funcionamento principal)
+        - Média (afeta parcialmente, mas tem contorno)
+        - Alta (impede o uso da aplicação ou recurso essencial)
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: 🧪 Ambiente
+      description: Onde esse erro aconteceu?
+      placeholder: "Ex: Localhost / Postman / Deploy em Railway"
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: 📝 Notas adicionais
+      description: Alguma observação extra?
+      placeholder: "Esse bug começou após a implementação da autenticação"
+    validations:
+      required: false
