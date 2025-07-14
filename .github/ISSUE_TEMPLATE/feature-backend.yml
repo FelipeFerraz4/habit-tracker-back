@@ -48,6 +48,19 @@ body:
         - label: "Validar dados com annotations (ex: @NotBlank)"
         - label: Criar testes unitários e de integração
         - label: Documentar endpoints no Swagger ou README
+  
+  - type: textarea
+    id: tests
+    attributes:
+      label: 🧪 Casos de Teste Esperados
+      description: Quais testes você pretende cobrir para essa feature?
+      placeholder: |
+        - Criar hábito com dados válidos → 201 Created
+        - Criar hábito com dados faltando → 400 Bad Request
+        - Listar hábitos sem login → 403 Forbidden
+        - Editar hábito de outro usuário → 403 Forbidden
+    validations:
+      required: false
 
   - type: input
     id: estimate
