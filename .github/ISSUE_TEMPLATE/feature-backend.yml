@@ -1,0 +1,67 @@
+name: Back-end Feature
+description: Template para desenvolvimento de novas features no back-end
+title: "[feature][backend] "
+labels: ["backend", "feature", "to do"]
+body:
+  - type: input
+    id: feature_name
+    attributes:
+      label: 🧩 Nome da Feature
+      description: Nome resumido da funcionalidade.
+      placeholder: "Ex: CRUD de hábitos"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 📃 Descrição da Feature
+      description: Explique o que essa feature faz, como funciona e para que serve.
+      placeholder: "Ex: Criar os endpoints necessários para gerenciar hábitos (listar, criar, editar, deletar)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: endpoints
+    attributes:
+      label: 🌐 Endpoints esperados
+      description: Liste os endpoints REST que essa feature criará ou alterará.
+      placeholder: |
+        - GET /habits
+        - POST /habits
+        - PUT /habits/{id}
+        - DELETE /habits/{id}
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: tasks
+    attributes:
+      label: ✅ Subtarefas / Checklist técnico
+      description: Marque as tarefas que fazem parte da entrega.
+      options:
+        - label: Criar classe de entidade (se necessário)
+        - label: Criar repositório JPA
+        - label: Criar DTOs de entrada e saída
+        - label: Implementar camada de serviço
+        - label: Criar controller com os endpoints
+        - label: "Validar dados com annotations (ex: @NotBlank)"
+        - label: Criar testes unitários e de integração
+        - label: Documentar endpoints no Swagger ou README
+
+  - type: input
+    id: estimate
+    attributes:
+      label: ⏱️ Tempo estimado
+      placeholder: "Ex: 2h"
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: 🗒️ Notas ou observações
+      description: Algum detalhe importante, exceção ou observação especial?
+      placeholder: "Ex: A rota será privada, precisa de autenticação JWT"
+    validations:
+      required: false
