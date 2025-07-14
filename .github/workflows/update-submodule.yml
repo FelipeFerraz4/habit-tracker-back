@@ -25,11 +25,11 @@ jobs:
           git checkout develop
 
           git submodule update --init --recursive
-          cd habit-tracker-back
+          cd back-end
           git fetch
           git checkout ${{ github.sha }}
           cd ..
 
-          git add habit-tracker-back
+          git add back-end
           git commit -m "chore: update submodule to latest commit ${{ github.sha }}"
           git push
