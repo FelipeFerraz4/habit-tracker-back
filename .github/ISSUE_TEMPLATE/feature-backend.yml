@@ -27,10 +27,10 @@ body:
       label: 🌐 Endpoints esperados
       description: Liste os endpoints REST que essa feature criará ou alterará.
       placeholder: |
-        - [] GET /habits
-        - [] POST /habits
-        - [] PUT /habits/{id}
-        - [] DELETE /habits/{id}
+        - [ ] GET /habits
+        - [ ] POST /habits
+        - [ ] PUT /habits/{id}
+        - [ ] DELETE /habits/{id}
     validations:
       required: false
 
@@ -40,15 +40,15 @@ body:
       label: ✅ Subtarefas / Checklist técnico
       description: Liste as subtarefas técnicas que precisam ser realizadas para concluir esta feature.
       placeholder: |
-        - [] Criar classe de entidade
-        - [] Criar repositório JPA
-        - [] Criar DTOs de entrada e saída
-        - [] Implementar camada de serviço
-        - [] Criar controller com os endpoints
-        - [] Validar dados com annotations (ex: @NotBlank)
-        - [] Criar testes unitários
-        - [] Criar testes de integração
-        - [] Documentar endpoints no Swagger ou README
+        - [ ] Criar classe de entidade
+        - [ ] Criar repositório JPA
+        - [ ] Criar DTOs de entrada e saída
+        - [ ] Implementar camada de serviço
+        - [ ] Criar controller com os endpoints
+        - [ ] Validar dados com annotations (ex: @NotBlank)
+        - [ ] Criar testes unitários
+        - [ ] Criar testes de integração
+        - [ ] Documentar endpoints no Swagger ou README
     validations:
       required: false
 
@@ -59,10 +59,10 @@ body:
       label: 🧪 Casos de Teste Esperados
       description: Quais testes você pretende cobrir para essa feature?
       placeholder: |
-        - [] Criar hábito com dados válidos → 201 Created
-        - [] Criar hábito com dados faltando → 400 Bad Request
-        - [] Listar hábitos sem login → 403 Forbidden
-        - [] Editar hábito de outro usuário → 403 Forbidden
+        - [ ] Criar hábito com dados válidos → 201 Created
+        - [ ] Criar hábito com dados faltando → 400 Bad Request
+        - [ ] Listar hábitos sem login → 403 Forbidden
+        - [ ] Editar hábito de outro usuário → 403 Forbidden
     validations:
       required: false
 
