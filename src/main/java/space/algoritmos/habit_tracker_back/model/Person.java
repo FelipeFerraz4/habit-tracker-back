@@ -15,4 +15,5 @@ public class Person {
     private String phoneNumber;
     private String profilePictureUrl;
     private String bio;
+    private String password;
 }
