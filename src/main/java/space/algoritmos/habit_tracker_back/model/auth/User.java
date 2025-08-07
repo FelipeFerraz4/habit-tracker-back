@@ -21,7 +21,7 @@ public class User implements UserDetails {
     private UUID id;
 
     @Column(name = "user_name", nullable = false, unique = true)
-    private String userName;
+    private String username;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -57,8 +57,6 @@ public class User implements UserDetails {
         return roles;
     }
 
-    // Para fins de exemplo, retornamos uma lista vazia.
-    // Você pode substituir isso por uma relação com entidades Permission ou Role.
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.getPermissions();
@@ -67,7 +65,7 @@ public class User implements UserDetails {
     // Spring Security usa username como identificador de login
     @Override
     public String getUsername() {
-        return this.email;
+        return this.username;
     }
 
     // Os outros getters são baseados diretamente nos campos já existentes
