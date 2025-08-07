@@ -22,7 +22,7 @@ public class User implements UserDetails {
     @Column(nullable = false, updatable = false)
     private UUID id;
 
-    @Column(name = "user_name", nullable = false)
+    @Column(name = "user_name", nullable = false, unique = true)
     private String userName;
 
     @Column(nullable = false, unique = true)
