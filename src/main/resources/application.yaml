@@ -20,3 +20,9 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration
+
+  security:
+    jwt:
+      token:
+        secret: your_jwt_secret_key
+        expiration: 3600000 # 1 hour in milliseconds
