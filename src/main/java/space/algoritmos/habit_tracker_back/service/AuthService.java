@@ -1,11 +1,9 @@
 package space.algoritmos.habit_tracker_back.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import space.algoritmos.habit_tracker_back.dto.security.AccountCredentialsDTO;
 import space.algoritmos.habit_tracker_back.dto.security.TokenDTO;
@@ -15,16 +13,19 @@ import space.algoritmos.habit_tracker_back.security.jwt.JwtTokenProvider;
 @Service
 public class AuthService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    public ResponseEntity<TokenDTO> signIn(AccountCredentialsDTO accountCredentialsDTO) {
+    public AuthService(UserRepository userRepository, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
+        this.userRepository = userRepository;
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
+    }
+
+    public TokenDTO signIn(AccountCredentialsDTO accountCredentialsDTO) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         accountCredentialsDTO.username(),
@@ -42,6 +43,6 @@ public class AuthService {
                 user.getRoles()
         );
 
-        return ResponseEntity.ok(token);
+        return token;
     }
 }
