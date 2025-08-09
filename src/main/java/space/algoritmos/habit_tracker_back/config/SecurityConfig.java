@@ -51,4 +51,32 @@ public class SecurityConfig {
         return passwordEncoder;
     }
 
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        JwtTokenFilter jwtTokenFilter = new JwtTokenFilter(tokenProvider);
+
+        return http
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable)
+                .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/users").denyAll()
+                        .requestMatchers(
+                                "/api/auth/signin",
+                                "/api/auth/refresh/**",
+                                "/api/swagger-ui/**",
+                                "/api/v1/api-docs/**"
+                        ).permitAll()
+                        .requestMatchers("/api/**").authenticated()
+                )
+                .cors(withDefaults())
+                .build();
+    }
+
 }
