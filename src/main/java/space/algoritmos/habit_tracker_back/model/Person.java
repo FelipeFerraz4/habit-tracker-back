@@ -42,7 +42,8 @@ public class Person {
     private String bio;
 
     @Column(nullable = false)
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private PersonStatus status;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
