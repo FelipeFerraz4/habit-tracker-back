@@ -69,6 +69,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/users").denyAll()
                         .requestMatchers(
                                 "/api/auth/signin",
+                                "/api/users/register/**",
                                 "/api/auth/refresh/**",
                                 "/api/swagger-ui/**",
                                 "/api/v1/api-docs/**"
