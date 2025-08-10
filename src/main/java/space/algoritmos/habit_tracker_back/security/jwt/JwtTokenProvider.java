@@ -37,14 +37,12 @@ public class JwtTokenProvider {
     }
 
     private Algorithm algorithm;
-    private String issuerURL;
 
     @PostConstruct
     protected void init() {
         // Encode secret key to Base64
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
         algorithm = Algorithm.HMAC256(secretKey);
-        issuerURL = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
     }
 
     public TokenDTO createAccessToken(String username, List<String> roles) {
@@ -59,6 +57,7 @@ public class JwtTokenProvider {
     }
 
     private String getAccessToken(String username, List<String> roles, Date now, Date validity) {
+        String issuerURL = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         return JWT.create()
                 .withSubject(username)
                 .withClaim("roles", roles)
@@ -106,6 +105,7 @@ public class JwtTokenProvider {
     }
 
     private DecodedJWT decodeToken(String token) {
+        String issuerURL = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         JWTVerifier verifier = JWT.require(algorithm)
                 .withIssuer(issuerURL)
                 .build();

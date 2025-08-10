@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "permissions")
 @Data
@@ -18,7 +20,7 @@ public class Permission implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
-    private Long id;
+    private UUID id;
 
     @Column(nullable = false, unique = true)
     private String description;
