@@ -2,8 +2,10 @@ package space.algoritmos.habit_tracker_back.security.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
+import lombok.extern.slf4j.Slf4j;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +22,9 @@ import space.algoritmos.habit_tracker_back.exception.InvalidJwtAutenticationExce
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+@Slf4j
 @Service
 public class JwtTokenProvider {
 
@@ -54,6 +58,33 @@ public class JwtTokenProvider {
         String refreshToken = getRefreshToken(username, roles, now, refreshTokenValidity);
 
         return new TokenDTO(username, true, now, accessTokenValidity, accessToken, refreshToken);
+    }
+
+    public TokenDTO refreshToken(String refreshToken) {
+        String token = extractToken(refreshToken)
+                .orElseThrow(() -> new IllegalArgumentException("Refresh token inválido ou ausente"));
+
+        try {
+            JWTVerifier verifier = JWT.require(algorithm).build();
+            DecodedJWT decodedJWT = verifier.verify(token);
+
+            String username = decodedJWT.getSubject();
+            List<String> roles = decodedJWT.getClaim("roles").asList(String.class);
+
+            log.info("Refresh token válido para usuário: {}", username);
+            return createAccessToken(username, roles);
+
+        } catch (JWTVerificationException e) {
+            log.error("Falha na verificação do refresh token: {}", e.getMessage());
+            throw new IllegalArgumentException("Refresh token inválido");
+        }
+    }
+
+    private Optional<String> extractToken(String refreshToken) {
+        if (StringUtils.hasText(refreshToken) && refreshToken.startsWith("Bearer ")) {
+            return Optional.of(refreshToken.substring("Bearer ".length()));
+        }
+        return Optional.empty();
     }
 
     private String getAccessToken(String username, List<String> roles, Date now, Date validity) {

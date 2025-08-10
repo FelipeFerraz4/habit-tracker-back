@@ -32,6 +32,28 @@ public class AuthController {
         return ResponseEntity.ok(token);
     }
 
+    @PutMapping("/refresh/{username}")
+    public ResponseEntity<?> refreshToken(
+            @PathVariable("username") String username,
+            @RequestHeader("Authorization") String refreshToken) {
+
+        if (parametersAreInvalid(username, refreshToken)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
+        }
+
+        var token = authService.refreshToken(username, refreshToken);
+
+        if (token == null) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid client request!");
+        }
+
+        return ResponseEntity.ok(token);
+    }
+
+    private boolean parametersAreInvalid(String username, String refreshToken) {
+        return !StringUtils.hasText(username) || !StringUtils.hasText(refreshToken);
+    }
+
     private boolean credentialsAreInvalid(AccountCredentialsDTO credentials) {
         return credentials == null ||
                 !StringUtils.hasText(credentials.username()) ||

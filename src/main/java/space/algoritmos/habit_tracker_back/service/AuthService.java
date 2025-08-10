@@ -55,4 +55,15 @@ public class AuthService {
 
         return token;
     }
+
+    public TokenDTO refreshToken(String username, String refreshToken) {
+        var user = userRepository.findByUsername(username);
+        TokenDTO token;
+        if (user != null) {
+            token = jwtTokenProvider.refreshToken(refreshToken);
+        } else {
+            throw new UsernameNotFoundException("Username " + username + " not found!");
+        }
+        return token;
+    }
 }
