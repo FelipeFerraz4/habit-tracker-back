@@ -6,7 +6,7 @@ VALUES
     ),
     (
         (SELECT id FROM users WHERE user_name = 'user@example.com'),
-        (SELECT id FROM permissions WHERE description = 'COMMUM_USER')
+        (SELECT id FROM permissions WHERE description = 'COMMOM_USER')
     ),
     (
         (SELECT id FROM users WHERE user_name = 'manager@example.com'),
@@ -14,5 +14,5 @@ VALUES
     ),
     (
         (SELECT id FROM users WHERE user_name = 'guest@example.com'),
-        (SELECT id FROM permissions WHERE description = 'COMMUM_USER')
+        (SELECT id FROM permissions WHERE description = 'COMMOM_USER')
     );

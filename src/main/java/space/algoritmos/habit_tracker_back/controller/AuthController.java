@@ -59,4 +59,6 @@ public class AuthController {
                 !StringUtils.hasText(credentials.username()) ||
                 !StringUtils.hasText(credentials.password());
     }
+
+
 }
